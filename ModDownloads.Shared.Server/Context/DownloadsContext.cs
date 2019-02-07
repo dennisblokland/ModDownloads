@@ -12,7 +12,8 @@ namespace ModDownloads.Shared.Server.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL("server=localhost;database=mod_downloads;user=root;password=;");
+            //  optionsBuilder.UseMySQL("server=localhost;database=mod_downloads;user=root;password=;");
+            optionsBuilder.UseSqlite("Data Source=../downloads.db");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

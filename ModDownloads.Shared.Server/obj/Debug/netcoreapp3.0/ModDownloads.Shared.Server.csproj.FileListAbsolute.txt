@@ -1,0 +1,14 @@
+C:\Users\Dennis\source\repos\ModDownloads\ModDownloads.Shared.Server\obj\Debug\netcoreapp3.0\ModDownloads.Shared.Server.csprojAssemblyReference.cache
+C:\Users\Dennis\source\repos\ModDownloads\ModDownloads.Shared.Server\obj\Debug\netcoreapp3.0\ModDownloads.Shared.Server.csproj.CoreCompileInputs.cache
+C:\Users\Dennis\source\repos\ModDownloads\ModDownloads.Shared.Server\obj\Debug\netcoreapp3.0\ModDownloads.Shared.Server.AssemblyInfoInputs.cache
+C:\Users\Dennis\source\repos\ModDownloads\ModDownloads.Shared.Server\obj\Debug\netcoreapp3.0\ModDownloads.Shared.Server.AssemblyInfo.cs
+C:\Users\Dennis\source\repos\ModDownloads\ModDownloads.Shared.Server\bin\Debug\netcoreapp3.0\ModDownloads.Shared.Server.deps.json
+C:\Users\Dennis\source\repos\ModDownloads\ModDownloads.Shared.Server\bin\Debug\netcoreapp3.0\ModDownloads.Shared.Server.runtimeconfig.json
+C:\Users\Dennis\source\repos\ModDownloads\ModDownloads.Shared.Server\bin\Debug\netcoreapp3.0\ModDownloads.Shared.Server.runtimeconfig.dev.json
+C:\Users\Dennis\source\repos\ModDownloads\ModDownloads.Shared.Server\bin\Debug\netcoreapp3.0\ModDownloads.Shared.Server.dll
+C:\Users\Dennis\source\repos\ModDownloads\ModDownloads.Shared.Server\bin\Debug\netcoreapp3.0\ModDownloads.Shared.Server.pdb
+C:\Users\Dennis\source\repos\ModDownloads\ModDownloads.Shared.Server\bin\Debug\netcoreapp3.0\ModDownloads.Shared.dll
+C:\Users\Dennis\source\repos\ModDownloads\ModDownloads.Shared.Server\bin\Debug\netcoreapp3.0\ModDownloads.Shared.pdb
+C:\Users\Dennis\source\repos\ModDownloads\ModDownloads.Shared.Server\obj\Debug\netcoreapp3.0\ModDownloads.Shared.Server.csproj.CopyComplete
+C:\Users\Dennis\source\repos\ModDownloads\ModDownloads.Shared.Server\obj\Debug\netcoreapp3.0\ModDownloads.Shared.Server.dll
+C:\Users\Dennis\source\repos\ModDownloads\ModDownloads.Shared.Server\obj\Debug\netcoreapp3.0\ModDownloads.Shared.Server.pdb

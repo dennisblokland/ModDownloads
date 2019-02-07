@@ -1,17 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.271
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28531.58
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModDownloads.Server", "ModDownloads.Server\ModDownloads.Server.csproj", "{3B3688B9-43CE-471D-ADFD-10F754BC088A}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModDownloads.Client", "ModDownloads.Client\ModDownloads.Client.csproj", "{E3838FF1-B091-4620-9DBF-C6E169B0549B}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModDownloads.Shared", "ModDownloads.Shared\ModDownloads.Shared.csproj", "{0F0C1F59-83A9-4D36-B3DC-833B0470ECBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModScraper", "ModScraper\ModScraper.csproj", "{9D9423C6-E720-41C9-B016-F749DD925AB1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModScraper", "ModScraper\ModScraper.csproj", "{9D9423C6-E720-41C9-B016-F749DD925AB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModDownloads.Shared.Server", "ModDownloads.Shared.Server\ModDownloads.Shared.Server.csproj", "{92110E05-9159-498B-9238-F22DD91D4A81}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModDownloads.Shared.Server", "ModDownloads.Shared.Server\ModDownloads.Shared.Server.csproj", "{5E957324-26E4-4D1A-BA5B-87871DEF1D46}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3B3688B9-43CE-471D-ADFD-10F754BC088A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3B3688B9-43CE-471D-ADFD-10F754BC088A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3B3688B9-43CE-471D-ADFD-10F754BC088A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3B3688B9-43CE-471D-ADFD-10F754BC088A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E3838FF1-B091-4620-9DBF-C6E169B0549B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E3838FF1-B091-4620-9DBF-C6E169B0549B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E3838FF1-B091-4620-9DBF-C6E169B0549B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E3838FF1-B091-4620-9DBF-C6E169B0549B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0F0C1F59-83A9-4D36-B3DC-833B0470ECBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0F0C1F59-83A9-4D36-B3DC-833B0470ECBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F0C1F59-83A9-4D36-B3DC-833B0470ECBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -35,10 +23,10 @@ Global
 		{9D9423C6-E720-41C9-B016-F749DD925AB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D9423C6-E720-41C9-B016-F749DD925AB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9D9423C6-E720-41C9-B016-F749DD925AB1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{92110E05-9159-498B-9238-F22DD91D4A81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{92110E05-9159-498B-9238-F22DD91D4A81}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{92110E05-9159-498B-9238-F22DD91D4A81}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{92110E05-9159-498B-9238-F22DD91D4A81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E957324-26E4-4D1A-BA5B-87871DEF1D46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E957324-26E4-4D1A-BA5B-87871DEF1D46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E957324-26E4-4D1A-BA5B-87871DEF1D46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E957324-26E4-4D1A-BA5B-87871DEF1D46}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

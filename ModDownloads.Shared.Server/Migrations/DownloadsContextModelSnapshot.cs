@@ -14,7 +14,7 @@ namespace ModDownloads.Shared.Server.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024");
+                .HasAnnotation("ProductVersion", "3.0.0-preview.19074.3");
 
             modelBuilder.Entity("ModDownloads.Shared.Entities.Download", b =>
                 {

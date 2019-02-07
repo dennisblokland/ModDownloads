@@ -1,0 +1,6 @@
+C:\Users\Dennis\source\repos\ModDownloads\ModDownloads.Server\obj\Debug\netcoreapp3.0\ModDownloads.Server.csprojAssemblyReference.cache
+C:\Users\Dennis\source\repos\ModDownloads\ModDownloads.Server\obj\Debug\netcoreapp3.0\ModDownloads.Server.csproj.CoreCompileInputs.cache
+C:\Users\Dennis\source\repos\ModDownloads\ModDownloads.Server\obj\Debug\netcoreapp3.0\ModDownloads.Server.RazorAssemblyInfo.cache
+C:\Users\Dennis\source\repos\ModDownloads\ModDownloads.Server\obj\Debug\netcoreapp3.0\ModDownloads.Server.RazorAssemblyInfo.cs
+C:\Users\Dennis\source\repos\ModDownloads\ModDownloads.Server\obj\Debug\netcoreapp3.0\ModDownloads.Server.AssemblyInfoInputs.cache
+C:\Users\Dennis\source\repos\ModDownloads\ModDownloads.Server\obj\Debug\netcoreapp3.0\ModDownloads.Server.AssemblyInfo.cs
