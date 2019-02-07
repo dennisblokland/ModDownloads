@@ -827,6 +827,9 @@
       "ModDownloads.Shared/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "System.ComponentModel.Annotations": "4.6.0-preview.19073.11"
+        },
         "compile": {
           "bin/placeholder/ModDownloads.Shared.dll": {}
         },
@@ -3420,7 +3423,8 @@
       "Microsoft.EntityFrameworkCore.Sqlite >= 3.0.0-preview.19074.3",
       "Microsoft.NETCore.App >= 3.0.0-preview-27324-5",
       "Microsoft.NETCore.Platforms >= 3.0.0-preview.19073.11",
-      "ModDownloads.Shared >= 1.0.0"
+      "ModDownloads.Shared >= 1.0.0",
+      "System.ComponentModel.Annotations >= 4.6.0-preview.19073.11"
     ]
   },
   "packageFolders": {
@@ -3494,6 +3498,10 @@
             "target": "Package",
             "version": "[3.0.0-preview.19073.11, )",
             "autoReferenced": true
+          },
+          "System.ComponentModel.Annotations": {
+            "target": "Package",
+            "version": "[4.6.0-preview.19073.11, )"
           }
         },
         "imports": [
