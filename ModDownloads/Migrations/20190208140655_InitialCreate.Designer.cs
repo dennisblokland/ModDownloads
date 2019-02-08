@@ -9,7 +9,7 @@ using ModDownloads.Server.Context;
 namespace ModDownloads.Server.Migrations
 {
     [DbContext(typeof(DownloadsContext))]
-    [Migration("20190207165452_InitialCreate")]
+    [Migration("20190208140655_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,9 +27,7 @@ namespace ModDownloads.Server.Migrations
 
                     b.Property<int>("ModId");
 
-                    b.Property<DateTime>("Timestamp")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate();
+                    b.Property<DateTime>("Timestamp");
 
                     b.HasKey("ID");
 

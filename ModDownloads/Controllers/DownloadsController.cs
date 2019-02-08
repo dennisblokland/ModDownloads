@@ -25,7 +25,7 @@ namespace ModDownloads.Server.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Download>>> GetDownload()
         {
-            return await _context.Download.ToListAsync();
+            return await _context.Download.OrderBy(d => d.Timestamp).ToListAsync();
         }
 
         // GET: api/Downloads/5
