@@ -7,8 +7,11 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { ChartsModule } from 'ng2-charts';
 import { DownloadService } from './download.service';
+import { ModService } from './mod.service';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -24,10 +27,12 @@ import { DownloadService } from './download.service';
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
     ]),
-    ChartsModule
+    NgxChartsModule,
+    BrowserAnimationsModule,
   ],
   providers: [
-    DownloadService
+    DownloadService,
+    ModService
   ],
   bootstrap: [AppComponent]
 })
