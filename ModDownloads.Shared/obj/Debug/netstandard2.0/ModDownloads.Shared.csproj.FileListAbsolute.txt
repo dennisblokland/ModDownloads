@@ -1,9 +1,0 @@
-C:\Users\Dennis\source\repos\ModDownloads\ModDownloads.Shared\bin\Debug\netstandard2.0\ModDownloads.Shared.deps.json
-C:\Users\Dennis\source\repos\ModDownloads\ModDownloads.Shared\bin\Debug\netstandard2.0\ModDownloads.Shared.dll
-C:\Users\Dennis\source\repos\ModDownloads\ModDownloads.Shared\bin\Debug\netstandard2.0\ModDownloads.Shared.pdb
-C:\Users\Dennis\source\repos\ModDownloads\ModDownloads.Shared\obj\Debug\netstandard2.0\ModDownloads.Shared.csproj.CoreCompileInputs.cache
-C:\Users\Dennis\source\repos\ModDownloads\ModDownloads.Shared\obj\Debug\netstandard2.0\ModDownloads.Shared.AssemblyInfoInputs.cache
-C:\Users\Dennis\source\repos\ModDownloads\ModDownloads.Shared\obj\Debug\netstandard2.0\ModDownloads.Shared.AssemblyInfo.cs
-C:\Users\Dennis\source\repos\ModDownloads\ModDownloads.Shared\obj\Debug\netstandard2.0\ModDownloads.Shared.dll
-C:\Users\Dennis\source\repos\ModDownloads\ModDownloads.Shared\obj\Debug\netstandard2.0\ModDownloads.Shared.pdb
-C:\Users\Dennis\source\repos\ModDownloads\ModDownloads.Shared\obj\Debug\netstandard2.0\ModDownloads.Shared.csprojAssemblyReference.cache

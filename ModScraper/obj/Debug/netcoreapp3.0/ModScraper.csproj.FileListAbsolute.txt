@@ -1,4 +1,0 @@
-C:\Users\Dennis\source\repos\ModDownloads\ModScraper\obj\Debug\netcoreapp3.0\ModScraper.csprojAssemblyReference.cache
-C:\Users\Dennis\source\repos\ModDownloads\ModScraper\obj\Debug\netcoreapp3.0\ModScraper.csproj.CoreCompileInputs.cache
-C:\Users\Dennis\source\repos\ModDownloads\ModScraper\obj\Debug\netcoreapp3.0\ModScraper.AssemblyInfoInputs.cache
-C:\Users\Dennis\source\repos\ModDownloads\ModScraper\obj\Debug\netcoreapp3.0\ModScraper.AssemblyInfo.cs
