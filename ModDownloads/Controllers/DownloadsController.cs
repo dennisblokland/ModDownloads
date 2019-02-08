@@ -27,7 +27,11 @@ namespace ModDownloads.Server.Controllers
         {
             return await _context.Download.OrderBy(d => d.Timestamp).ToListAsync();
         }
-
+        [HttpGet("byDate")]
+        public async Task<ActionResult<IEnumerable<Download>>> GetDownload(DateTime startTime, DateTime endtime)
+        {
+            return await _context.Download.Where(d => d.Timestamp >= startTime && d.Timestamp <= endtime).OrderBy(d => d.Timestamp).ToListAsync();
+        }
         // GET: api/Downloads/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Download>> GetDownload(int id)

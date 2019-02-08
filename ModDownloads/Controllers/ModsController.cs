@@ -41,7 +41,16 @@ namespace ModDownloads.Server.Controllers
 
             return mod;
         }
-
+        [HttpGet("{id}/downloads")]
+        public async Task<ActionResult<IEnumerable<Download>>> GetModDownloads(int id)
+        {
+            return await _context.Download.Where(x => x.ModId == id).OrderBy(d => d.Timestamp).ToListAsync();
+        }
+        [HttpGet("{id}/downloads/byDate")]
+        public async Task<ActionResult<IEnumerable<Download>>> GetDownloadByDate(int id, DateTime startTime, DateTime endtime)
+        {
+            return await _context.Download.Where(d => d.ModId == id && d.Timestamp >= startTime && d.Timestamp <= endtime).OrderBy(d => d.Timestamp).ToListAsync();
+        }
         // PUT: api/Mods/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutMod(int id, Mod mod)
