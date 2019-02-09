@@ -12,6 +12,7 @@ import { ModService } from './mod.service';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DetailComponent } from './detail/detail.component';
+import { ModComponent } from './mod/mod.component';
 
 
 @NgModule({
@@ -20,15 +21,17 @@ import { DetailComponent } from './detail/detail.component';
     NavMenuComponent,
     HomeComponent,
     DetailComponent,
+    ModComponent,
 
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
-    FormsModule, 
+    FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'detail/:name', component: DetailComponent, pathMatch: 'full' },
+      { path: 'mods', component: ModComponent, pathMatch: 'full' },
     ]),
     NgxChartsModule,
     BrowserAnimationsModule,
