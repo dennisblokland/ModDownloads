@@ -83,7 +83,7 @@ namespace ModDownloads.Server.Controllers
                 List<Download> downloads = _context.Download.Where(x => x.ModId == id && x.Timestamp >= new DateTime(DateTime.Now.Year, DateTime.Now.Month, i, 00, 00, 00) && x.Timestamp <= new DateTime(DateTime.Now.Year, DateTime.Now.Month, i, 00, 00, 00).AddDays(1)).OrderBy(x => x.Timestamp).ToList();
                 if (downloads.Count != 0)
                 {
-                    count += DownloadsHelper.GetDownloadsIncrease(downloads).Average(x => x.Value);
+                    count += DownloadsHelper.GetDownloadsIncrease(downloads).Sum(x => x.Value);
                     days++;
                 }
 
@@ -100,7 +100,7 @@ namespace ModDownloads.Server.Controllers
                 List<Download> downloads = _context.Download.Where(x => x.ModId == id && x.Timestamp >= firstDayOfMonth && x.Timestamp <= DateTime.Now).OrderBy(x => x.Timestamp).ToList();
                 if (downloads.Count != 0)
                 {
-                    count += DownloadsHelper.GetDownloadsIncrease(downloads).Average(x => x.Value);
+                    count += DownloadsHelper.GetDownloadsIncrease(downloads).Sum(x => x.Value);
     
                 }
             return (int)Math.Round(count);
@@ -115,7 +115,7 @@ namespace ModDownloads.Server.Controllers
             List<Download> downloads = _context.Download.Where(x => x.ModId == id && x.Timestamp >= firstDayOfYear && x.Timestamp <= DateTime.Now).OrderBy(x => x.Timestamp).ToList();
             if (downloads.Count != 0)
             {
-                count += DownloadsHelper.GetDownloadsIncrease(downloads).Average(x => x.Value);
+                count += DownloadsHelper.GetDownloadsIncrease(downloads).Sum(x => x.Value);
 
             }
             return (int)Math.Round(count);
