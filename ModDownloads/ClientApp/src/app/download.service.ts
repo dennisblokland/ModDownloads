@@ -16,9 +16,17 @@ export class DownloadService {
     // Get all jogging data
     return this.http.get(this.accessPointUrlDownloads, { headers: this.headers });
   }
+  public getTotal() {
+    // Get all jogging data
+    return this.http.get(this.accessPointUrlDownloads+ '/Total', { headers: this.headers });
+  }
   public getById(payload) {
     // Get all download data for a specifc mod
     return this.http.get(this.accessPointUrlMods + '/' + payload.id + "/downloads", { headers: this.headers });
+  }
+  public getIncreaseById(payload) {
+    // Get all download data for a specifc mod
+    return this.http.get(this.accessPointUrlMods + '/' + payload.id + "/downloads/increase", { headers: this.headers });
   }
   public add(payload) {
     return this.http.post(this.accessPointUrlDownloads, payload, { headers: this.headers });

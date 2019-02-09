@@ -41,10 +41,38 @@ namespace ModDownloads.Server.Controllers
 
             return mod;
         }
+    
+        [HttpGet("byName/{name}")]
+        public async Task<ActionResult<Mod>> GetMod(string Name)
+        {
+            var mod = await _context.Mod.Where(m => m.Name == Name).FirstAsync();
+
+            if (mod == null)
+            {
+                return NotFound();
+            }
+
+            return mod;
+        }
         [HttpGet("{id}/downloads")]
         public async Task<ActionResult<IEnumerable<Download>>> GetModDownloads(int id)
         {
             return await _context.Download.Where(x => x.ModId == id).OrderBy(d => d.Timestamp).ToListAsync();
+        }
+
+        [HttpGet("{id}/downloads/increase")]
+        public Dictionary<DateTime, int> GetModDownloadsIncrease(int id)
+        {
+            Dictionary<DateTime, int> dict = new Dictionary<DateTime, int>();
+            List<Download> downloads = _context.Download.Where(x => x.ModId == id).OrderBy(d => d.Timestamp).ToList();
+            for (int key = 0; key < downloads.Count; ++key)
+            {
+                if(key != 0)
+                {
+                    dict.Add(downloads[key].Timestamp, downloads[key].Downloads - downloads[key - 1].Downloads);
+                }
+            }
+            return dict;
         }
         [HttpGet("{id}/downloads/byDate")]
         public async Task<ActionResult<IEnumerable<Download>>> GetDownloadByDate(int id, DateTime startTime, DateTime endtime)

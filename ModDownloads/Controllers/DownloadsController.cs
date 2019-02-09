@@ -32,6 +32,21 @@ namespace ModDownloads.Server.Controllers
         {
             return await _context.Download.Where(d => d.Timestamp >= startTime && d.Timestamp <= endtime).OrderBy(d => d.Timestamp).ToListAsync();
         }
+        [HttpGet("Total")]
+        public int GetTotalDownloads()
+        {
+            int count = 0;
+            foreach(Mod mod in _context.Mod)
+            {
+                Download download = _context.Download.Where(x => x.ModId == mod.ID).OrderByDescending(x => x.Timestamp).FirstOrDefault();
+                if(download != null)
+                {
+                    count += download.Downloads;
+
+                }
+            }
+            return count;
+        }
         // GET: api/Downloads/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Download>> GetDownload(int id)

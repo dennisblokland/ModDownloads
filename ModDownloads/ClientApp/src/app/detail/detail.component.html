@@ -1,0 +1,31 @@
+<h1>{{name}}</h1>
+<ngx-charts-line-chart [view]="view"
+                       [scheme]="colorScheme"
+                       [results]="DownloadData"
+                       [gradient]="gradient"
+                       [xAxis]="showXAxis"
+                       [yAxis]="showYAxis"
+                       [legend]="showLegend"
+                       [showXAxisLabel]="showXAxisLabel"
+                       [showYAxisLabel]="showYAxisLabel"
+                       [xAxisLabel]="xAxisLabel"
+                       [yAxisLabel]="yAxisLabel"
+                       [autoScale]="autoScale"
+                       [timeline]="timeline">
+ 
+</ngx-charts-line-chart>
+<h2>Increase</h2>
+<ngx-charts-line-chart [view]="view"
+                      [scheme]="colorScheme"
+                      [results]="IncreaseData"
+                      [gradient]="gradient"
+                      [xAxis]="showXAxis"
+                      [yAxis]="showYAxis"
+                      [legend]="showLegend"
+                      [showXAxisLabel]="showXAxisLabel"
+                      [showYAxisLabel]="showYAxisLabel"
+                      [xAxisLabel]="xAxisLabel"
+                      [yAxisLabel]="yAxisLabel"
+                      [autoScale]="autoScale"
+                      [timeline]="timeline">
+</ngx-charts-line-chart>

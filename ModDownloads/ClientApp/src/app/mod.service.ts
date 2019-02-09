@@ -21,6 +21,10 @@ export class ModService {
     // Get all download data for a specifc mod
     return this.http.get(this.accessPointUrlMods + '/' + payload.id , { headers: this.headers });
   }
+  public getByName(name) {
+    // Get all download data for a specifc mod
+    return this.http.get(this.accessPointUrlMods + '/byName/' + name, { headers: this.headers });
+  }
   public add(payload) {
     return this.http.post(this.accessPointUrlMods, payload, { headers: this.headers });
   }

@@ -1,18 +1,28 @@
-
-<div style="display: inline-block">
-  <ngx-charts-line-chart [view]="view"
-                         [scheme]="colorScheme"
-                         [results]="DownloadData"
-                         [gradient]="gradient"
-                         [xAxis]="showXAxis"
-                         [yAxis]="showYAxis"
-                         [legend]="showLegend"
-                         [showXAxisLabel]="showXAxisLabel"
-                         [showYAxisLabel]="showYAxisLabel"
-                         [xAxisLabel]="xAxisLabel"
-                         [yAxisLabel]="yAxisLabel"
-                         [autoScale]="autoScale"
-                         [timeline]="timeline"
-                         (select)="onSelect($event)">
-  </ngx-charts-line-chart>
-</div>
+<div class="container">
+ 
+  <div class="row">
+    <div class="col-md-3">
+      <div class="card-counter primary">
+        <i class="fas fa-cloud-download-alt"></i>
+        <span class="count-numbers"> {{totalDownlaods}}</span>
+        <span class="count-name">Total Downloads</span>
+      </div>
+    </div>
+    <div style="display: inline-block">
+      <ngx-charts-line-chart [view]="view"
+                             [scheme]="colorScheme"
+                             [results]="DownloadData"
+                             [gradient]="gradient"
+                             [xAxis]="showXAxis"
+                             [yAxis]="showYAxis"
+                             [legend]="showLegend"
+                             [showXAxisLabel]="showXAxisLabel"
+                             [showYAxisLabel]="showYAxisLabel"
+                             [xAxisLabel]="xAxisLabel"
+                             [yAxisLabel]="yAxisLabel"
+                             [autoScale]="autoScale"
+                             [timeline]="timeline"
+                             (select)="onSelect($event)">
+      </ngx-charts-line-chart>
+    </div>
+  </div>

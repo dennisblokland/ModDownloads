@@ -1,22 +1,24 @@
 import { Component,} from '@angular/core';
 import { DownloadService } from '../download.service'
 import { ModService } from '../mod.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
 
-  private DownloadData: Array<any>;
+  public DownloadData: Array<any>;
+  public totalDownlaods: number;
 
-  constructor(private downloadService: DownloadService, private modService: ModService) {
+  constructor(private downloadService: DownloadService, private modService: ModService, private router: Router) {
     modService.get().subscribe((data: Array<any>) => {
       let DownloadData2 = [];
       for (let entry of data) {
         downloadService.getById(entry).subscribe((data: Array<any>) => {
           let set = { name: entry.name, series: [] };
-          set.name = entry.name;
           for (let entry of data) {
             set.series.push({
               name: new Date(entry.timestamp),
@@ -32,6 +34,10 @@ export class HomeComponent {
       
       
     });
+    downloadService.getTotal().subscribe((data: number) => {
+      this.totalDownlaods = data;
+    });
+
 
   }
 
@@ -43,9 +49,9 @@ export class HomeComponent {
   gradient = false;
   showLegend = true;
   showXAxisLabel = true;
-  xAxisLabel = 'Number';
+  xAxisLabel = 'Downloads';
   showYAxisLabel = true;
-  yAxisLabel = 'Value';
+  yAxisLabel = 'Time';
   timeline = true;
 
   colorScheme = {
@@ -55,6 +61,6 @@ export class HomeComponent {
   // line, area
   autoScale = true;
   onSelect(event) {
-    console.log(event);
+    this.router.navigate(['/detail', event]);
   }
 }
