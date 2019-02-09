@@ -14,6 +14,11 @@ export class DetailComponent implements OnInit {
   public DownloadData: Array<any>;
   public IncreaseData: Array<any>;
 
+  public totalDownloads: number;
+  public dailyDownloads: number;
+  public monthlyDownloads: number;
+  public yearlyDownloads: number;
+
   constructor(private downloadService: DownloadService, private modService: ModService, private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -50,9 +55,20 @@ export class DetailComponent implements OnInit {
         
 
       });
-
-
+      this.downloadService.getDailyById(data).subscribe((data: number) => {
+        this.dailyDownloads = data;
+      });
+      this.downloadService.getMonthlyById(data).subscribe((data: number) => {
+        this.monthlyDownloads = data;
+      });
+      this.downloadService.getYearlyById(data).subscribe((data: number) => {
+        this.yearlyDownloads = data;
+      });
+      this.downloadService.getTotalById(data).subscribe((data: number) => {
+        this.totalDownloads = data;
+      });
     });
+
    
  }
       

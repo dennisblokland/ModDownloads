@@ -11,7 +11,10 @@ import { Router } from '@angular/router';
 export class HomeComponent {
 
   public DownloadData: Array<any>;
-  public totalDownlaods: number;
+  public totalDownloads: number;
+  public dailyDownloads: number;
+  public monthlyDownloads: number;
+  public yearlyDownloads: number;
 
   constructor(private downloadService: DownloadService, private modService: ModService, private router: Router) {
     modService.get().subscribe((data: Array<any>) => {
@@ -35,7 +38,16 @@ export class HomeComponent {
       
     });
     downloadService.getTotal().subscribe((data: number) => {
-      this.totalDownlaods = data;
+      this.totalDownloads = data;
+    });
+    downloadService.getDaily().subscribe((data: number) => {
+      this.dailyDownloads = data;
+    });
+    downloadService.getMonthly().subscribe((data: number) => {
+      this.monthlyDownloads = data;
+    });
+    downloadService.getYearly().subscribe((data: number) => {
+      this.yearlyDownloads = data;
     });
 
 

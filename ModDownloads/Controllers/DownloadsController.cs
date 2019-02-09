@@ -32,6 +32,38 @@ namespace ModDownloads.Server.Controllers
         {
             return await _context.Download.Where(d => d.Timestamp >= startTime && d.Timestamp <= endtime).OrderBy(d => d.Timestamp).ToListAsync();
         }
+        [HttpGet("Daily")]
+        public int GetTotalDownloadsDaily()
+        {
+            double count = 0.0;
+            foreach (Mod mod in _context.Mod)
+            {
+                count += new ModsController(_context).GetTotalDownloadsDaily(mod.ID);
+            }
+            return (int)Math.Round(count);
+        }
+        [HttpGet("Monthly")]
+        public int GetTotalDownloadsMonthly()
+        {
+            double count = 0.0;
+            foreach (Mod mod in _context.Mod)
+            {
+                count += new ModsController(_context).GetTotalDownloadsMonthly(mod.ID);
+            }
+            return (int)Math.Round(count);
+        }
+
+        [HttpGet("Yearly")]
+        public int GetTotalDownloadsYearly()
+        {
+            double count = 0.0;
+            foreach (Mod mod in _context.Mod)
+            {
+                count += new ModsController(_context).GetTotalDownloadsYearly(mod.ID);
+            }
+            return (int)Math.Round(count);
+        }
+
         [HttpGet("Total")]
         public int GetTotalDownloads()
         {
