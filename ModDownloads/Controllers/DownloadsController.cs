@@ -128,6 +128,7 @@ namespace ModDownloads.Server.Controllers
         public async Task<ActionResult<Download>> PostDownload(Download download)
         {
             _context.Download.Add(download);
+           
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetDownload", new { id = download.ID }, download);

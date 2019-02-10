@@ -77,18 +77,17 @@ namespace ModDownloads.Server.Controllers
         {
             double count = 0.0;
             DateTime date = DateTime.Now;
-            int days = 0;
-            for (int i = 1; i <= date.Day; i++)
+
+            DateTime startOfDay = new DateTime(date.Year, date.Month, date.Day, 00 ,00 ,00);
+            List<Download> downloads = _context.Download.Where(x => x.ModId == id && x.Timestamp >= startOfDay && x.Timestamp <= startOfDay.AddDays(1)).OrderByDescending(x => x.Timestamp).ToList();
+            if (downloads.Count != 0)
             {
-                List<Download> downloads = _context.Download.Where(x => x.ModId == id && x.Timestamp >= new DateTime(DateTime.Now.Year, DateTime.Now.Month, i, 00, 00, 00) && x.Timestamp <= new DateTime(DateTime.Now.Year, DateTime.Now.Month, i, 00, 00, 00).AddDays(1)).OrderBy(x => x.Timestamp).ToList();
-                if (downloads.Count != 0)
-                {
-                    count += DownloadsHelper.GetDownloadsIncrease(downloads).Sum(x => x.Value);
-                    days++;
-                }
+                count += downloads.First().Downloads - downloads.Last().Downloads;
 
             }
-            return (int)Math.Round(count/days);
+
+            
+            return (int)Math.Round(count);
         }
         [HttpGet("{id}/downloads/Monthly")]
         public int GetTotalDownloadsMonthly(int id)
@@ -97,12 +96,12 @@ namespace ModDownloads.Server.Controllers
             DateTime date = DateTime.Now;
             DateTime firstDayOfMonth = new DateTime(date.Year, date.Month, 1);
 
-                List<Download> downloads = _context.Download.Where(x => x.ModId == id && x.Timestamp >= firstDayOfMonth && x.Timestamp <= DateTime.Now).OrderBy(x => x.Timestamp).ToList();
-                if (downloads.Count != 0)
-                {
-                    count += DownloadsHelper.GetDownloadsIncrease(downloads).Sum(x => x.Value);
-    
-                }
+                List<Download> downloads = _context.Download.Where(x => x.ModId == id && x.Timestamp >= firstDayOfMonth && x.Timestamp <= DateTime.Now).OrderByDescending(x => x.Timestamp).ToList();
+            if (downloads.Count != 0)
+            {
+                count += downloads.First().Downloads - downloads.Last().Downloads;
+
+            }
             return (int)Math.Round(count);
         }
         [HttpGet("{id}/downloads/Yearly")]
@@ -111,11 +110,11 @@ namespace ModDownloads.Server.Controllers
             double count = 0.0;
             DateTime date = DateTime.Now;
             DateTime firstDayOfYear = new DateTime(date.Year, 1, 1);
-
-            List<Download> downloads = _context.Download.Where(x => x.ModId == id && x.Timestamp >= firstDayOfYear && x.Timestamp <= DateTime.Now).OrderBy(x => x.Timestamp).ToList();
+            List<Download> downloads = _context.Download.Where(x => x.ModId == id && x.Timestamp >= firstDayOfYear && x.Timestamp <= DateTime.Now).OrderByDescending(x => x.Timestamp).ToList();
+      
             if (downloads.Count != 0)
             {
-                count += DownloadsHelper.GetDownloadsIncrease(downloads).Sum(x => x.Value);
+                count += downloads.First().Downloads - downloads.Last().Downloads;
 
             }
             return (int)Math.Round(count);

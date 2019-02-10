@@ -25,6 +25,7 @@ namespace ModDownloads.Server.Context
                 entity.HasKey(e => e.ID);
                 entity.Property(e => e.Name).IsRequired();
                 entity.Property(e => e.URL).IsRequired();
+                entity.HasMany(e => e.Downloads).WithOne(e => e.Mod);
             });
 
             modelBuilder.Entity<Download>(entity =>
@@ -34,6 +35,7 @@ namespace ModDownloads.Server.Context
                 entity.HasOne(d => d.Mod)
                   .WithMany(p => p.Downloads);
             });
+   
         }
     }
 }

@@ -37,6 +37,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20190210122327_remove.cs" />
+    <Compile Remove="Migrations\20190210122327_remove.Designer.cs" />
+    <Compile Remove="Migrations\20190210122406_remove increase.cs" />
+    <Compile Remove="Migrations\20190210122406_remove increase.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ModDownloads.Shared\ModDownloads.Shared.csproj" />
   </ItemGroup>
 
