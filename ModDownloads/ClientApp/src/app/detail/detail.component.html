@@ -43,6 +43,12 @@
                          [yAxisLabel]="yAxisLabel"
                          [autoScale]="autoScale"
                          [timeline]="timeline">
+    <ng-template #tooltipTemplate let-model="model">
+
+      {{model.series}}: {{model.name | date:'d/M/yy, H:mm'  }}
+      <br />
+      {{model.value}}
+    </ng-template>
 
   </ngx-charts-line-chart>
   <h2>Increase</h2>
@@ -59,5 +65,11 @@
                          [yAxisLabel]="yAxisLabel"
                          [autoScale]="autoScale"
                          [timeline]="timeline">
+    <ng-template #tooltipTemplate let-model="model">
+
+      {{model.series}}: {{model.name | date:'d/M/yy, H:mm'  }}
+      <br />
+      {{model.value}}
+    </ng-template>
   </ngx-charts-line-chart>
   </div>
