@@ -11,8 +11,8 @@ export class DetailComponent implements OnInit {
 
   public name: string;
   private sub: any;
-  public DownloadData: Array<any>;
-  public IncreaseData: Array<any>;
+  public DownloadData: Array<any> = [{ data: [], label: '' }];
+  public IncreaseData: Array<any> = [{ data: [], label: '' }];
 
   public totalDownloads: number;
   public dailyDownloads: number;
@@ -29,11 +29,11 @@ export class DetailComponent implements OnInit {
     this.modService.getByName(this.name).subscribe((data: Array<any>) => {
       let DownloadData2 = [];
         this.downloadService.getById(data).subscribe((data: Array<any>) => {
-          let set = { name: this.name, series: [] };
+          let set = { label: this.name, data: [] };
           for (let entry of data) {
-            set.series.push({
-              name: new Date(entry.timestamp),
-              value: entry.downloads
+            set.data.push({
+              x: new Date(entry.timestamp),
+              y: entry.downloads
             });
           }
 
@@ -43,11 +43,11 @@ export class DetailComponent implements OnInit {
         });
    
       this.downloadService.getIncreaseById(data).subscribe((data: { [index: string]: any; }) => {
-        let IncreaseData2 = [{ name: this.name, series: [] }];
+        let IncreaseData2 = [{ label: this.name, data: [] }];
         for (let [key, value] of Object.entries(data)) {
-          IncreaseData2[0].series.push({
-            name: new Date(key),
-            value: value
+          IncreaseData2[0].data.push({
+            x: new Date(key),
+            y: value
           });
           this.IncreaseData = [...IncreaseData2];
         }
@@ -71,27 +71,37 @@ export class DetailComponent implements OnInit {
 
    
  }
-      
+  public lineChartType: string = 'line';
+  public lineChartOptions: any = {
+    responsive: true,
+    scales: {
+      xAxes: [{
+        type: 'time',
+
+        time: {
+          displayFormats: {
+            quarter: 'MMM D'
+          }
+        }
+      }]
+    }
+  };
+  public lineChartIncreaseOptions: any = {
+    responsive: true,
+    scales: {
+      xAxes: [{
+        type: 'time',
+        distribution: 'series',
+        time: {
+          displayFormats: {
+            quarter: 'MMM D'
+          }
+        }
+      }]
+    }
+  };
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
-  view: any[] = [1200, 800];
 
-  // options for the chart
-  showXAxis = true;
-  showYAxis = true;
-  gradient = false;
-  showLegend = false;
-  showXAxisLabel = true;
-  xAxisLabel = 'Time';
-  showYAxisLabel = true;
-  yAxisLabel = 'Downloads';
-  timeline = true;
-
-  colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
-  };
-
-  // line, area
-  autoScale = true;
 }

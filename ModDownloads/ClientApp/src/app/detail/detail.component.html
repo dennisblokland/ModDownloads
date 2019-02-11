@@ -30,46 +30,15 @@
       </div>
     </div>
   </div>
-  <ngx-charts-line-chart [view]="view"
-                         [scheme]="colorScheme"
-                         [results]="DownloadData"
-                         [gradient]="gradient"
-                         [xAxis]="showXAxis"
-                         [yAxis]="showYAxis"
-                         [legend]="showLegend"
-                         [showXAxisLabel]="showXAxisLabel"
-                         [showYAxisLabel]="showYAxisLabel"
-                         [xAxisLabel]="xAxisLabel"
-                         [yAxisLabel]="yAxisLabel"
-                         [autoScale]="autoScale"
-                         [timeline]="timeline">
-    <ng-template #tooltipTemplate let-model="model">
+  <canvas baseChart width="400" height="200"
+          [datasets]="DownloadData"
+          [options]="lineChartOptions"
+          [chartType]="lineChartType"></canvas>
 
-      {{model.series}}: {{model.name | date:'d/M/yy, H:mm'  }}
-      <br />
-      {{model.value}}
-    </ng-template>
 
-  </ngx-charts-line-chart>
   <h2>Increase</h2>
-  <ngx-charts-line-chart [view]="view"
-                         [scheme]="colorScheme"
-                         [results]="IncreaseData"
-                         [gradient]="gradient"
-                         [xAxis]="showXAxis"
-                         [yAxis]="showYAxis"
-                         [legend]="showLegend"
-                         [showXAxisLabel]="showXAxisLabel"
-                         [showYAxisLabel]="showYAxisLabel"
-                         [xAxisLabel]="xAxisLabel"
-                         [yAxisLabel]="yAxisLabel"
-                         [autoScale]="autoScale"
-                         [timeline]="timeline">
-    <ng-template #tooltipTemplate let-model="model">
-
-      {{model.series}}: {{model.name | date:'d/M/yy, H:mm'  }}
-      <br />
-      {{model.value}}
-    </ng-template>
-  </ngx-charts-line-chart>
-  </div>
+  <canvas baseChart width="400" height="200"
+          [datasets]="IncreaseData"
+          [options]="lineChartIncreaseOptions"
+          [chartType]="lineChartType"></canvas>
+</div>

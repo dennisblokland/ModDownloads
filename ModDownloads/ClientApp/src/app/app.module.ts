@@ -13,7 +13,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DetailComponent } from './detail/detail.component';
 import { ModComponent } from './mod/mod.component';
-
+import { ChartsModule } from 'ng2-charts-x';
 
 @NgModule({
   declarations: [
@@ -35,6 +35,7 @@ import { ModComponent } from './mod/mod.component';
     ]),
     NgxChartsModule,
     BrowserAnimationsModule,
+    ChartsModule
   ],
   providers: [
     DownloadService,

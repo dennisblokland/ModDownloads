@@ -1,8 +1,7 @@
-import { Component,} from '@angular/core';
+import { Component, ViewChild} from '@angular/core';
 import { DownloadService } from '../download.service'
 import { ModService } from '../mod.service';
 import { Router } from '@angular/router';
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -10,33 +9,48 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent {
 
-  public DownloadData: Array<any>;
   public totalDownloads: number;
   public dailyDownloads: number;
   public monthlyDownloads: number;
   public yearlyDownloads: number;
+  public lineChartData: Array<any> = [{ data: [], label: '' }];
 
+  public lineChartType: string = 'line';
+  public lineChartOptions: any = {
+    responsive: true,
+    scales: {
+      xAxes: [{
+        type: 'time',
+        time: {
+          displayFormats: {
+            quarter: 'MMM D'
+          }
+        }
+      }]
+    }
+  };
   constructor(private downloadService: DownloadService, private modService: ModService, private router: Router) {
     modService.get().subscribe((data: Array<any>) => {
-      let DownloadData2 = [];
+      let DownloadData = [];
       for (let entry of data) {
+        
         downloadService.getById(entry).subscribe((data: Array<any>) => {
-          let set = { name: entry.name, series: [] };
+          let set = { label: entry.name,  data: [] };
           for (let entry of data) {
-            set.series.push({
-              name: new Date(entry.timestamp),
-              value: entry.downloads
+            set.data.push({
+              x: new Date(entry.timestamp),
+              y: entry.downloads
             });
           }
-
-          DownloadData2.push(set);
-          this.DownloadData = [...DownloadData2];
-
+          DownloadData.push(set);
+          this.lineChartData = [...DownloadData];
         });
+
+
       }
-      
-      
     });
+
+
     downloadService.getTotal().subscribe((data: number) => {
       this.totalDownloads = data;
     });
@@ -53,26 +67,4 @@ export class HomeComponent {
 
   }
 
-  view: any[] = [1200, 800];
-
-  // options for the chart
-  showXAxis = true;
-  showYAxis = true;
-  gradient = false;
-  showLegend = true;
-  showXAxisLabel = true;
-  xAxisLabel = 'Downloads';
-  showYAxisLabel = true;
-  yAxisLabel = 'Time';
-  timeline = true;
-
-  colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
-  };
-
-  // line, area
-  autoScale = true;
-  onSelect(event) {
-    this.router.navigate(['/detail', event]);
-  }
 }
