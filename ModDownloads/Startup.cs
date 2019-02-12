@@ -44,7 +44,7 @@ namespace ModDownloads.Server
 
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
-
+            app.UseHsts();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
