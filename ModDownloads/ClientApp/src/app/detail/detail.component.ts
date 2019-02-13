@@ -91,7 +91,6 @@ export class DetailComponent implements OnInit {
     scales: {
       xAxes: [{
         type: 'time',
-        distribution: 'series',
         time: {
           displayFormats: {
             quarter: 'MMM D'

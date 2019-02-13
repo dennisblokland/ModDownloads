@@ -16,7 +16,13 @@ namespace ModDownloads.Server
             {
                 if (key != 0)
                 {
-                    dict.Add(downloads[key].Timestamp, downloads[key].Downloads - downloads[key - 1].Downloads);
+                    int downloadCount = downloads[key].Downloads - downloads[key - 1].Downloads;
+                    TimeSpan time = downloads[key].Timestamp - downloads[key - 1].Timestamp;
+                    if (Math.Round(time.TotalHours,1) != 2.0)
+                    {
+                        downloadCount = Convert.ToInt32(downloadCount / (Math.Round(time.TotalHours, 1) / 2));
+                    }
+                    dict.Add(downloads[key].Timestamp, downloadCount);
                 }
             }
             return dict;
