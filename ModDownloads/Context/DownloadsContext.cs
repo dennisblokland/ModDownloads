@@ -12,8 +12,8 @@ namespace ModDownloads.Server.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //  optionsBuilder.UseMySQL("server=localhost;database=mod_downloads;user=root;password=;");
-            optionsBuilder.UseSqlite("Data Source=downloads.db");
+          optionsBuilder.UseMySql("server=192.168.0.110;database=mod_downloads;user=root;password=;");
+          // optionsBuilder.UseSqlite("Data Source=downloads.db");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -22,7 +22,7 @@ namespace ModDownloads.Server.Context
 
             modelBuilder.Entity<Mod>(entity =>
             {
-                entity.HasKey(e => e.ID);
+                entity.HasKey(e => e.Id);
                 entity.Property(e => e.Name).IsRequired();
                 entity.Property(e => e.URL).IsRequired();
                 entity.HasMany(e => e.Downloads).WithOne(e => e.Mod);
@@ -30,7 +30,7 @@ namespace ModDownloads.Server.Context
 
             modelBuilder.Entity<Download>(entity =>
             {
-                entity.HasKey(e => e.ID);
+                entity.HasKey(e => e.Id);
                 entity.Property(e => e.Timestamp);
                 entity.HasOne(d => d.Mod)
                   .WithMany(p => p.Downloads);

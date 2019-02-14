@@ -8,7 +8,7 @@ namespace ModDownloads.Shared.Entities
 {
     public class Download
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         public int Downloads { get; set; } 
         public int ModId { get; set; }

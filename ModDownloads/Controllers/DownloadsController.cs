@@ -38,7 +38,7 @@ namespace ModDownloads.Server.Controllers
             double count = 0.0;
             foreach (Mod mod in _context.Mod)
             {
-                count += new ModsController(_context).GetTotalDownloadsDaily(mod.ID);
+                count += new ModsController(_context).GetTotalDownloadsDaily(mod.Id);
             }
             return (int)Math.Round(count);
         }
@@ -48,7 +48,7 @@ namespace ModDownloads.Server.Controllers
             double count = 0.0;
             foreach (Mod mod in _context.Mod)
             {
-                count += new ModsController(_context).GetTotalDownloadsMonthly(mod.ID);
+                count += new ModsController(_context).GetTotalDownloadsMonthly(mod.Id);
             }
             return (int)Math.Round(count);
         }
@@ -59,7 +59,7 @@ namespace ModDownloads.Server.Controllers
             double count = 0.0;
             foreach (Mod mod in _context.Mod)
             {
-                count += new ModsController(_context).GetTotalDownloadsYearly(mod.ID);
+                count += new ModsController(_context).GetTotalDownloadsYearly(mod.Id);
             }
             return (int)Math.Round(count);
         }
@@ -70,7 +70,7 @@ namespace ModDownloads.Server.Controllers
             int count = 0;
             foreach(Mod mod in _context.Mod)
             {
-                Download download = _context.Download.Where(x => x.ModId == mod.ID).OrderByDescending(x => x.Timestamp).FirstOrDefault();
+                Download download = _context.Download.Where(x => x.ModId == mod.Id).OrderByDescending(x => x.Timestamp).FirstOrDefault();
                 if(download != null)
                 {
                     count += download.Downloads;
@@ -97,7 +97,7 @@ namespace ModDownloads.Server.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutDownload(int id, Download download)
         {
-            if (id != download.ID)
+            if (id != download.Id)
             {
                 return BadRequest();
             }
@@ -131,7 +131,7 @@ namespace ModDownloads.Server.Controllers
            
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetDownload", new { id = download.ID }, download);
+            return CreatedAtAction("GetDownload", new { id = download.Id }, download);
         }
 
         // DELETE: api/Downloads/5
@@ -152,7 +152,7 @@ namespace ModDownloads.Server.Controllers
 
         private bool DownloadExists(int id)
         {
-            return _context.Download.Any(e => e.ID == id);
+            return _context.Download.Any(e => e.Id == id);
         }
     }
 }

@@ -14,11 +14,12 @@ namespace ModDownloads.Server.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.0.0-preview.19074.3");
+                .HasAnnotation("ProductVersion", "2.2.0-rtm-35687")
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("ModDownloads.Shared.Entities.Download", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("Downloads");
@@ -27,7 +28,7 @@ namespace ModDownloads.Server.Migrations
 
                     b.Property<DateTime>("Timestamp");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.HasIndex("ModId");
 
@@ -36,7 +37,7 @@ namespace ModDownloads.Server.Migrations
 
             modelBuilder.Entity("ModDownloads.Shared.Entities.Mod", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Name")
@@ -45,7 +46,7 @@ namespace ModDownloads.Server.Migrations
                     b.Property<string>("URL")
                         .IsRequired();
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.ToTable("Mod");
                 });

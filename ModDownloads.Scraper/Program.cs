@@ -42,7 +42,7 @@ namespace ModDownloads.Scraper
                 var download = new Download()
                 {
                     Downloads = downloads,
-                    ModId = mod.ID
+                    ModId = mod.Id
                 };
                 var json = JsonConvert.SerializeObject(download);
                 var stringContent = new StringContent(json, UnicodeEncoding.UTF8, "application/json");

@@ -135,7 +135,7 @@ namespace ModDownloads.Server.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutMod(int id, Mod mod)
         {
-            if (id != mod.ID)
+            if (id != mod.Id)
             {
                 return BadRequest();
             }
@@ -168,7 +168,7 @@ namespace ModDownloads.Server.Controllers
             _context.Mod.Add(mod);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetMod", new { id = mod.ID }, mod);
+            return CreatedAtAction("GetMod", new { id = mod.Id }, mod);
         }
 
         // DELETE: api/Mods/5
@@ -189,7 +189,7 @@ namespace ModDownloads.Server.Controllers
 
         private bool ModExists(int id)
         {
-            return _context.Mod.Any(e => e.ID == id);
+            return _context.Mod.Any(e => e.Id == id);
         }
     }
 }
