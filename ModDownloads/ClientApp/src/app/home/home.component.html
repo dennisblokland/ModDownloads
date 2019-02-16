@@ -35,7 +35,10 @@
           [chartType]="lineChartType"></canvas>
 
 </div>
-<div *ngFor="let mod of mods">
-  <a class="nav-link text-dark" [routerLink]='["/detail/", mod.name ]'>{{ mod.name }} {{ mod.downloads }}</a>
-</div>
+<div class="container">
+  <div class="row mm-top">
+        <a *ngFor="let mod of mods" class="nav-link text-dark col-sm-6" [routerLink]='["/detail/", mod.name ]'><li class="list-group-item">{{ mod.name }}  <span class="badge badge-secondary float-right">{{ mod.downloads }}</span></li></a>
+    </div>
+  </div>
+
 
