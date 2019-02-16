@@ -77,24 +77,9 @@ export class DetailComponent implements OnInit {
     scales: {
       xAxes: [{
         type: 'time',
-
         time: {
-          displayFormats: {
-            quarter: 'MMM D'
-          }
-        }
-      }]
-    }
-  };
-  public lineChartIncreaseOptions: any = {
-    responsive: true,
-    scales: {
-      xAxes: [{
-        type: 'time',
-        time: {
-          displayFormats: {
-            quarter: 'MMM D'
-          }
+          unit: 'day',
+          tooltipFormat: 'll HH:MM'
         }
       }]
     }

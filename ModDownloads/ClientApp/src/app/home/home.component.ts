@@ -14,6 +14,7 @@ export class HomeComponent {
   public monthlyDownloads: number;
   public yearlyDownloads: number;
   public lineChartData: Array<any> = [{ data: [], label: '' }];
+  public mods: object;
 
   public lineChartType: string = 'line';
   public lineChartOptions: any = {
@@ -22,9 +23,8 @@ export class HomeComponent {
       xAxes: [{
         type: 'time',
         time: {
-          displayFormats: {
-            quarter: 'MMM D'
-          }
+          unit: 'day',
+          tooltipFormat: 'll HH:MM'
         }
       }]
     }
@@ -63,7 +63,15 @@ export class HomeComponent {
     downloadService.getYearly().subscribe((data: number) => {
       this.yearlyDownloads = data;
     });
+    this.modService.get().subscribe((data: Array<any>) => {
+      this.mods = data;
+      for (let entry of data) {
+        this.downloadService.getTotalById(entry).subscribe((data: number) => {
+          entry.downloads = data
+        });
 
+      }
+    });
 
   }
 

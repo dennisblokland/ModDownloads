@@ -12,7 +12,7 @@ namespace ModDownloads.Server.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-          optionsBuilder.UseMySql("server=192.168.0.110;database=mod_downloads;user=root;password=;");
+          optionsBuilder.UseMySql("server=localhost;database=mod_downloads;user=root;password=;");
           // optionsBuilder.UseSqlite("Data Source=downloads.db");
         }
 
