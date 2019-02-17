@@ -13,8 +13,13 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DetailComponent } from './detail/detail.component';
 import { ModComponent } from './mod/mod.component';
-import { ChartsModule } from 'ng2-charts-x';
+import { LoginFormComponent } from './login-form/login-form.component';
 
+import { AuthGuard } from './auth.guard';
+import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
+
+
+import { ChartsModule } from 'ng2-charts-x';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,24 +27,36 @@ import { ChartsModule } from 'ng2-charts-x';
     HomeComponent,
     DetailComponent,
     ModComponent,
-
+    LoginFormComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    HttpClientModule,
+    HttpClientModule, 
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'detail/:name', component: DetailComponent, pathMatch: 'full' },
-      { path: 'mods', component: ModComponent, pathMatch: 'full' },
+      { path: 'mods', component: ModComponent, pathMatch: 'full', canActivate: [AuthGuard]},
+      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: 'login', component: LoginFormComponent, pathMatch: 'full' },
     ]),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem('auth_token');
+        },
+        whitelistedDomains: ['localhost:5001']
+      }
+    }),
     NgxChartsModule,
     BrowserAnimationsModule,
     ChartsModule
   ],
   providers: [
     DownloadService,
-    ModService
+    ModService,
+    AuthGuard,
+    JwtHelperService
+
   ],
   bootstrap: [AppComponent]
 })

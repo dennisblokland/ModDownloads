@@ -10,10 +10,12 @@ export class ModService {
   private accessPointUrlMods: string = window.location.origin + "/api/mods";
 
   constructor(private http: HttpClient) {
-    this.headers = new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8' });
+    let authToken = localStorage.getItem('auth_token');
+    this.headers = new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8', Authorization: `Bearer ${authToken}`});
   }
 
   public get() {
+    console.log(this.headers);
     return this.http.get(this.accessPointUrlMods, { headers: this.headers });
   }
   public getById(payload) {
