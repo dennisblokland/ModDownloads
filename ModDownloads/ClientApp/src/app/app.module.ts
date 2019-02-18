@@ -14,12 +14,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DetailComponent } from './detail/detail.component';
 import { ModComponent } from './mod/mod.component';
 import { LoginFormComponent } from './login-form/login-form.component';
+import { LogoutComponent } from './logout/logout.component';
 
 import { AuthGuard } from './auth.guard';
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 
 
 import { ChartsModule } from 'ng2-charts-x';
+export function jwtTokenGetter() {
+  return localStorage.getItem('auth_token');
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,22 +32,22 @@ import { ChartsModule } from 'ng2-charts-x';
     DetailComponent,
     ModComponent,
     LoginFormComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule, 
     FormsModule,
     RouterModule.forRoot([
-      { path: 'detail/:name', component: DetailComponent, pathMatch: 'full' },
+      { path: 'detail/:name', component: DetailComponent, pathMatch: 'full' , canActivate: [AuthGuard]},
       { path: 'mods', component: ModComponent, pathMatch: 'full', canActivate: [AuthGuard]},
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [AuthGuard] },
       { path: 'login', component: LoginFormComponent, pathMatch: 'full' },
+      { path: 'logout', component: LogoutComponent, pathMatch: 'full' },
     ]),
     JwtModule.forRoot({
       config: {
-        tokenGetter: () => {
-          return localStorage.getItem('auth_token');
-        },
+        tokenGetter: jwtTokenGetter,
         whitelistedDomains: ['localhost:5001']
       }
     }),
@@ -60,4 +64,5 @@ import { ChartsModule } from 'ng2-charts-x';
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

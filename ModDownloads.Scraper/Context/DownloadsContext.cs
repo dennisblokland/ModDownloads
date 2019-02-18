@@ -1,11 +1,9 @@
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using ModDownloads.Shared.Entities;
 
-namespace ModDownloads.Server.Context
+namespace ModDownloads.Scraper.Context
 {
-    public class DownloadsContext : IdentityDbContext<IdentityUser>
+    public class DownloadsContext : DbContext
     {
 
         public DbSet<Download> Download { get; set; }
