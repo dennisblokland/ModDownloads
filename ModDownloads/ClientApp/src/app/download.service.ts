@@ -38,6 +38,10 @@ export class DownloadService {
   public getMonthlyById(payload) {
     return this.http.get(this.accessPointUrlMods + '/' + payload.id + "/downloads/monthly", { headers: this.headers });
   }
+  public getAllMonthlyById(payload) {
+    return this.http.get(this.accessPointUrlMods + '/' + payload.id + "/downloads/months", { headers: this.headers });
+  }
+ 
   public getYearlyById(payload) {
     return this.http.get(this.accessPointUrlMods + '/' + payload.id + "/downloads/yearly", { headers: this.headers });
   }

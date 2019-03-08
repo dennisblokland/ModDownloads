@@ -41,4 +41,18 @@
           [datasets]="IncreaseData"
           [options]="lineChartOptions"
           [chartType]="lineChartType"></canvas>
+
+  <table class="table">
+    <thead class="thead">
+      <tr>
+        <th scope="col">Month</th>
+        <th scope="col">Downloads</th>
+      </tr>
+    </thead>
+    <tr *ngFor="let x of monthlyDownloadsAllMonths">
+      <td>{{ x.month | date:'MMMM' }}</td>
+      <td>{{ x.value }}</td>
+
+    </tr>
+  </table>
 </div>
