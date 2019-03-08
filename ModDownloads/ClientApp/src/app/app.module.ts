@@ -21,6 +21,7 @@ import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 
 
 import { ChartsModule } from 'ng2-charts-x';
+import '../../node_modules/chartjs-plugin-zoom/src/chart.zoom.js';
 export function jwtTokenGetter() {
   return localStorage.getItem('auth_token');
 }

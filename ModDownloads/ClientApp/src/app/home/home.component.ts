@@ -1,4 +1,5 @@
-import { Component, ViewChild} from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { BaseChartDirective } from 'ng2-charts-x';
 import { DownloadService } from '../download.service'
 import { ModService } from '../mod.service';
 import { Router } from '@angular/router';
@@ -8,6 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+  @ViewChild(BaseChartDirective) chart: BaseChartDirective;
 
   public totalDownloads: number;
   public dailyDownloads: number;
@@ -15,10 +17,15 @@ export class HomeComponent {
   public yearlyDownloads: number;
   public lineChartData: Array<any> = [{ data: [], label: '' }];
   public mods: object;
-
   public lineChartType: string = 'line';
   public lineChartOptions: any = {
     responsive: true,
+
+    elements: {
+      point: {
+        radius: 0
+      }
+    },
     scales: {
       xAxes: [{
         type: 'time',
@@ -26,16 +33,26 @@ export class HomeComponent {
           unit: 'day',
           tooltipFormat: 'll HH:MM'
         }
+      }],
+      yAxes: [{
+        id: 0,
+        position: 'left',
+      }, {
+        id: 1,
+        position: 'right',
+
       }]
-    }
+    },
   };
   constructor(private downloadService: DownloadService, private modService: ModService, private router: Router) {
     modService.get().subscribe((data: Array<any>) => {
       let DownloadData = [];
+      let id = 0;
       for (let entry of data) {
         
         downloadService.getById(entry).subscribe((data: Array<any>) => {
-          let set = { label: entry.name,  data: [] };
+          let set = { label: entry.name, data: [], yAxisID: id};
+          console.log(id);
           for (let entry of data) {
             set.data.push({
               x: new Date(entry.timestamp),
@@ -44,7 +61,9 @@ export class HomeComponent {
           }
           DownloadData.push(set);
           this.lineChartData = [...DownloadData];
+          id++;
         });
+       
 
 
       }
@@ -74,5 +93,6 @@ export class HomeComponent {
     });
 
   }
+ 
 
 }
