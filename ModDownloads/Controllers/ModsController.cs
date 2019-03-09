@@ -56,15 +56,18 @@ namespace ModDownloads.Server.Controllers
         [HttpGet("{id}/downloads/increase")]
         public Dictionary<DateTime, int> GetModDownloadsIncrease(int id)
         {
-            List<Download> downloads = _context.Download.Where(x => x.ModId == id).OrderBy(d => d.Timestamp).ToList();
-          
+            List<Download> downloads = _context
+                .Download
+                .FromSql($"SELECT Id, ModId, MAX(Downloads) as Downloads, MAX(Timestamp) as Timestamp FROM download WHERE ModId = {id} GROUP BY year(Timestamp), month(Timestamp), day(Timestamp) DESC ORDER BY `Timestamp` ASC ")
+                .ToList();
+        
             return DownloadsHelper.GetDownloadsIncrease(downloads);
         }
 
         [HttpGet("{id}/downloads/byDate")]
-        public async Task<ActionResult<IEnumerable<Download>>> GetDownloadByDate(int id, DateTime startTime, DateTime endtime)
+        public async Task<ActionResult<IEnumerable<Download>>> GetDownloadByDate(int id, DateTime startTime)
         {
-            return await _context.Download.Where(d => d.ModId == id && d.Timestamp >= startTime && d.Timestamp <= endtime).OrderBy(d => d.Timestamp).ToListAsync();
+            return await _context.Download.Where(d => d.ModId == id && d.Timestamp >= startTime).OrderBy(d => d.Timestamp).ToListAsync();
         }
 
         [HttpGet("{id}/downloads/Daily")]

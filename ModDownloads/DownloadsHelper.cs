@@ -18,13 +18,25 @@ namespace ModDownloads.Server
                 {
                     int downloadCount = downloads[key].Downloads - downloads[key - 1].Downloads;
                     TimeSpan time = downloads[key].Timestamp - downloads[key - 1].Timestamp;
-                    if (Math.Round(time.TotalHours,1) != 2.0)
-                    {
-                        downloadCount = Convert.ToInt32(downloadCount / (Math.Round(time.TotalHours, 1) / 2));
-                    }
                     dict.Add(downloads[key].Timestamp, downloadCount);
                 }
             }
+            return dict;
+        }
+        public static Dictionary<DateTime, int> GetDownloadsIncrease(Dictionary<DateTime, int> downloads)
+        {
+            Dictionary<DateTime, int> dict = new Dictionary<DateTime, int>();
+            KeyValuePair<DateTime, int> prev = default(KeyValuePair<DateTime, int>);
+            foreach (var download in downloads)
+            {
+                if(prev.Value != 0)
+                {
+                    int downloadCount = download.Value - prev.Value;
+                    dict.Add(download.Key, downloadCount);
+                }
+                prev = download;
+            }
+        
             return dict;
         }
     }

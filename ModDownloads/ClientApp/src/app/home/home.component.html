@@ -29,7 +29,12 @@
       </div>
     </div>
   </div>
-  <canvas baseChart width="400" height="200" 
+  <select class="form-control" name="timespan" [(ngModel)]='nrSelect' (change)="onChange($event)">
+    <option *ngFor="let span of timespans;  index as i" [selected]="i == 0" [ngValue]="span">
+      {{ span }}
+    </option>
+  </select>
+  <canvas baseChart width="400" height="200"
           [datasets]="lineChartData"
           [options]="lineChartOptions"
           [chartType]="lineChartType"></canvas>

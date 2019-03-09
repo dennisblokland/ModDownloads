@@ -18,9 +18,12 @@ export class HomeComponent {
   public lineChartData: Array<any> = [{ data: [], label: '' }];
   public mods: object;
   public lineChartType: string = 'line';
+  public _modService: any;
+  public _downloadService: any;
+  public timespans: Array<string> = ["Today", "Past week", "Past month", "Past year", "All Time"];
+  public nrSelect = this.timespans[0];
   public lineChartOptions: any = {
     responsive: true,
-
     elements: {
       point: {
         radius: 0
@@ -44,32 +47,13 @@ export class HomeComponent {
       }]
     },
   };
+
   constructor(private downloadService: DownloadService, private modService: ModService, private router: Router) {
-    modService.get().subscribe((data: Array<any>) => {
-      let DownloadData = [];
-      let id = 0;
-      for (let entry of data) {
-        
-        downloadService.getById(entry).subscribe((data: Array<any>) => {
-          let set = { label: entry.name, data: [], yAxisID: id};
-          console.log(id);
-          for (let entry of data) {
-            set.data.push({
-              x: new Date(entry.timestamp),
-              y: entry.downloads
-            });
-          }
-          DownloadData.push(set);
-          this.lineChartData = [...DownloadData];
-          id++;
-        });
-       
-
-
-      }
-    });
-
-
+    this._modService = modService;
+    this._downloadService = downloadService;
+    var date = new Date()
+    date.setHours(0, 0, 0, 0);
+    this.getModDataAfterDate(date);
     downloadService.getTotal().subscribe((data: number) => {
       this.totalDownloads = data;
     });
@@ -93,6 +77,90 @@ export class HomeComponent {
     });
 
   }
- 
 
+
+  public onChange(event) {
+    var date = new Date(), y = date.getFullYear(), m = date.getMonth();
+    switch (event.target.value) {
+      case "0: Today": {
+        date.setHours(0, 0, 0, 0);
+        break;
+      }
+      case "1: Past week": {
+        date = this.getMonday(date);
+        break;
+      }
+      case "2: Past month": {
+        date = new Date(y, m, 1,0,0,0,0)
+        break;
+      }
+      case "3: Past year": {
+        date = new Date(y, 1, 1, 0, 0, 0, 0)
+        break;
+      }
+      case "4: All Time": {
+        this.getModDataAllTime();
+        return;
+      }
+      default: {
+
+        break;
+      }
+    }
+    this.getModDataAfterDate(date);
+  }
+
+  public getModDataAllTime() {
+    this._modService.get().subscribe((data: Array<any>) => {
+      let DownloadData = [];
+      let id = 0;
+      for (let entry of data) {
+
+        this._downloadService.getById(entry).subscribe((data: Array<any>) => {
+          let set = { label: entry.name, data: [], yAxisID: id };
+          for (let entry of data) {
+            set.data.push({
+              x: new Date(entry.timestamp),
+              y: entry.downloads
+            });
+          }
+          DownloadData.push(set);
+          this.lineChartData = [...DownloadData];
+          id++;
+        });
+      }
+    });
+  }
+  public getModDataAfterDate(date) {
+    this._modService.get().subscribe((data: Array<any>) => {
+      let DownloadData = [];
+      let id = 0;
+      for (let entry of data) {
+        entry.startTime = date;
+        this._downloadService.getByIdAfterDate(entry).subscribe((data: Array<any>) => {
+          let set = { label: entry.name, data: [], yAxisID: id };
+          for (let entry of data) {
+            set.data.push({
+              x: new Date(entry.timestamp),
+              y: entry.downloads
+            });
+          }
+          DownloadData.push(set);
+          this.lineChartData = [...DownloadData];
+          id++;
+        });
+      }
+    });
+  }
+
+  public getMonday(d) {
+  d = new Date(d);
+  var day = d.getDay(),
+      diff = d.getDate() - day + (day == 0 ? -6 : 1); // adjust when day is sunday
+    d = new Date(d.setDate(diff));
+    var year = d.getUTCFullYear();
+    var month = d.getUTCMonth();
+    var day = d.getUTCDate();
+    return new Date(year, month, day, 0, 0, 0, 0);
+}
 }

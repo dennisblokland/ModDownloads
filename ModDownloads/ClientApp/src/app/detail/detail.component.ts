@@ -87,6 +87,7 @@ export class DetailComponent implements OnInit {
   public lineChartType: string = 'line';
   public lineChartOptions: any = {
     responsive: true,
+ 
     elements: {
       point: {
         radius: 0

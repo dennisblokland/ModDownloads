@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 @Injectable()
 export class DownloadService {
@@ -47,6 +47,10 @@ export class DownloadService {
   }
   public getById(payload) {
     return this.http.get(this.accessPointUrlMods + '/' + payload.id + "/downloads", { headers: this.headers });
+  }
+  public getByIdAfterDate(payload) {
+    let params = new HttpParams().set('startTime', payload.startTime.toISOString());
+    return this.http.get(this.accessPointUrlMods + '/' + payload.id + "/downloads/byDate", { params: params, headers: this.headers });
   }
   public getIncreaseById(payload) {
     return this.http.get(this.accessPointUrlMods + '/' + payload.id + "/downloads/increase", { headers: this.headers });
