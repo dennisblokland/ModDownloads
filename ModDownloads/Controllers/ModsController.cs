@@ -58,7 +58,7 @@ namespace ModDownloads.Server.Controllers
         {
             List<Download> downloads = _context
                 .Download
-                .FromSql($"SELECT Id, ModId, MAX(Downloads) as Downloads, MAX(Timestamp) as Timestamp FROM download WHERE ModId = {id} GROUP BY year(Timestamp), month(Timestamp), day(Timestamp) DESC ORDER BY `Timestamp` ASC ")
+                .FromSql($"SELECT Id, ModId, MAX(Downloads) as Downloads, MAX(Timestamp) as Timestamp FROM Download WHERE ModId = {id} GROUP BY year(Timestamp), month(Timestamp), day(Timestamp) DESC ORDER BY `Timestamp` ASC ")
                 .ToList();
         
             return DownloadsHelper.GetDownloadsIncrease(downloads);
