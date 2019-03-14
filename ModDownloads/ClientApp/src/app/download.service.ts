@@ -49,7 +49,7 @@ export class DownloadService {
     return this.http.get(this.accessPointUrlMods + '/' + payload.id + "/downloads", { headers: this.headers });
   }
   public getByIdAfterDate(payload) {
-    let params = new HttpParams().set('startTime', payload.startTime.toISOString());
+    let params = new HttpParams().set('startTime', payload.startTime.toISOString()).set('grouping', payload.grouping);
     return this.http.get(this.accessPointUrlMods + '/' + payload.id + "/downloads/byDate", { params: params, headers: this.headers });
   }
   public getIncreaseById(payload) {

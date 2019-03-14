@@ -26,7 +26,7 @@ export class HomeComponent {
     responsive: true,
     elements: {
       point: {
-        radius: 0
+     //   radius: 0
       }
     },
     scales: {
@@ -53,7 +53,7 @@ export class HomeComponent {
     this._downloadService = downloadService;
     var date = new Date()
     date.setHours(0, 0, 0, 0);
-    this.getModDataAfterDate(date);
+    this.getModDataAfterDate(date,0);
     downloadService.getTotal().subscribe((data: number) => {
       this.totalDownloads = data;
     });
@@ -81,6 +81,7 @@ export class HomeComponent {
 
   public onChange(event) {
     var date = new Date(), y = date.getFullYear(), m = date.getMonth();
+    var grouping = 0;
     switch (event.target.value) {
       case "0: Today": {
         date.setHours(0, 0, 0, 0);
@@ -88,18 +89,22 @@ export class HomeComponent {
       }
       case "1: Past week": {
         date = this.getMonday(date);
+        grouping = 1;
         break;
       }
       case "2: Past month": {
-        date = new Date(y, m, 1,0,0,0,0)
+        date = new Date(y, m, 1, 0, 0, 0, 0)
+        grouping = 1;
         break;
       }
       case "3: Past year": {
         date = new Date(y, 1, 1, 0, 0, 0, 0)
+        grouping = 1;
         break;
       }
       case "4: All Time": {
         this.getModDataAllTime();
+        grouping = 2;
         return;
       }
       default: {
@@ -107,7 +112,7 @@ export class HomeComponent {
         break;
       }
     }
-    this.getModDataAfterDate(date);
+    this.getModDataAfterDate(date, grouping);
   }
 
   public getModDataAllTime() {
@@ -131,12 +136,13 @@ export class HomeComponent {
       }
     });
   }
-  public getModDataAfterDate(date) {
+  public getModDataAfterDate(date, grouping) {
     this._modService.get().subscribe((data: Array<any>) => {
       let DownloadData = [];
       let id = 0;
       for (let entry of data) {
         entry.startTime = date;
+        entry.grouping = grouping;
         this._downloadService.getByIdAfterDate(entry).subscribe((data: Array<any>) => {
           let set = { label: entry.name, data: [], yAxisID: id };
           for (let entry of data) {

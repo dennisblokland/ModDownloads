@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ModDownloads.Server.Context;
+using ModDownloads.Server.Enum;
 using ModDownloads.Shared.Entities;
 
 namespace ModDownloads.Server.Controllers
@@ -50,24 +51,69 @@ namespace ModDownloads.Server.Controllers
         [HttpGet("{id}/downloads")]
         public async Task<ActionResult<IEnumerable<Download>>> GetModDownloads(int id)
         {
-            return await _context.Download.Where(x => x.ModId == id).OrderBy(d => d.Timestamp).ToListAsync();
+            return await GetDownloadByDate(id, new DateTime(), Grouping.Day);
+
         }
 
         [HttpGet("{id}/downloads/increase")]
         public Dictionary<DateTime, int> GetModDownloadsIncrease(int id)
         {
-            List<Download> downloads = _context
-                .Download
-                .FromSql($"SELECT Id, ModId, MAX(Downloads) as Downloads, MAX(Timestamp) as Timestamp FROM Download WHERE ModId = {id} GROUP BY year(Timestamp), month(Timestamp), day(Timestamp) DESC ORDER BY `Timestamp` ASC ")
-                .ToList();
-        
+            List<Download> downloads = (List<Download>)this.GetDownloadByDate(id, new DateTime(), Grouping.Day).Result.Value;
+
             return DownloadsHelper.GetDownloadsIncrease(downloads);
         }
 
         [HttpGet("{id}/downloads/byDate")]
-        public async Task<ActionResult<IEnumerable<Download>>> GetDownloadByDate(int id, DateTime startTime)
+        public async Task<ActionResult<IEnumerable<Download>>> GetDownloadByDate(int id, DateTime startTime, Grouping grouping)
         {
-            return await _context.Download.Where(d => d.ModId == id && d.Timestamp >= startTime).OrderBy(d => d.Timestamp).ToListAsync();
+            if(grouping == Grouping.None)
+            {
+                return await _context.Download
+                .Where(d => d.ModId == id && d.Timestamp >= startTime)
+                .OrderBy(d => d.Timestamp).ToListAsync().ConfigureAwait(false);
+            }
+            else
+            {
+                return await _context.Download
+                .Where(d => d.ModId == id && d.Timestamp >= startTime)
+                .GroupBy(x => getGroupByFromGrouping(grouping, x))
+                .Select(x => new Download
+                {
+                    Id = x.Select(y => y.Id).First(),
+                    Downloads = x.Max(y => y.Downloads),
+                    Timestamp = x.Max(y => y.Timestamp),
+                    ModId = x.Select(y => y.ModId).First()
+
+                })
+                .OrderBy(d => d.Timestamp).ToListAsync().ConfigureAwait(false);
+            }
+
+        }
+
+        private object getGroupByFromGrouping(Grouping groupingEnum, Download x)
+        {
+            object grouping = null;
+            switch (groupingEnum)
+            {
+                case Grouping.None:
+                    break;
+                case Grouping.Day:
+                    grouping = new { x.Timestamp.Year, x.Timestamp.Month, x.Timestamp.Day };
+                    break;
+                case Grouping.Month:
+                    grouping = new { x.Timestamp.Year, x.Timestamp.Month};
+                    break;
+                case Grouping.Year:
+                    grouping = new { x.Timestamp.Year};
+                    break;
+                default:
+                    break;
+            }
+           
+
+            return grouping;
+
+
         }
 
         [HttpGet("{id}/downloads/Daily")]
@@ -93,7 +139,7 @@ namespace ModDownloads.Server.Controllers
             DateTime date = DateTime.Now;
             DateTime firstDayOfMonth = new DateTime(date.Year, date.Month, 1);
 
-                List<Download> downloads = _context.Download.Where(x => x.ModId == id && x.Timestamp >= firstDayOfMonth && x.Timestamp <= DateTime.Now).OrderByDescending(x => x.Timestamp).ToList();
+            List<Download> downloads = _context.Download.Where(x => x.ModId == id && x.Timestamp >= firstDayOfMonth && x.Timestamp <= DateTime.Now).OrderByDescending(x => x.Timestamp).ToList();
             if (downloads.Count != 0)
             {
                 count += downloads[0].Downloads - downloads.Last().Downloads;
