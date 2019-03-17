@@ -3,10 +3,15 @@ language: csharp
 solution: ModDownloads.sln
 mono: none
 dotnet: 2.2.105
-
-script:
+install:
  - dotnet restore
  - dotnet tool install --global dotnet-sonarscanner
+ 
+before_script:
+  - export PATH="$PATH:$HOME/.dotnet/tools"
+  
+script:
+
  - dotnet sonarscanner begin /k:"dennisblokland_ModDownloads" /d:sonar.organization="dennisblokland-github" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="$SONAR_KEY" || true
  - dotnet build
  - dotnet sonarscanner end /d:sonar.login="$SONAR_KEY" || true
