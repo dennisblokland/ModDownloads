@@ -12,6 +12,6 @@ before_script:
   
 script:
 
- - dotnet sonarscanner begin /k:"dennisblokland_ModDownloads"  /d:sonar.organization="dennisblokland-github" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="$SONAR_KEY"
+ - dotnet sonarscanner begin /k:"dennisblokland_ModDownloads"  /o:"dennisblokland-github" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="$SONAR_KEY"
  - dotnet build
  - dotnet sonarscanner end /d:sonar.login="$SONAR_KEY"
